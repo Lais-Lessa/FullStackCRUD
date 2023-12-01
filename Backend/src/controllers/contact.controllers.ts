@@ -31,12 +31,11 @@ export const update = async (
     req: Request,
     res: Response
   ): Promise<Response> => {
-    const { id } = req.params
-
+    const id: number = Number(req.params.id)
     const { name, email, phoneNumber } = req.body
 
     const retriever = await updateContact(
-        Number(id),
+        id,
         name,
         email,
         phoneNumber

@@ -1,4 +1,6 @@
-Criação de um cadastro de clientes que poderá conter muitos contatos associados.
+Projeto: FullStackCRUD
+
+ Criação de um cadastro de clientes que poderá conter muitos contatos associados.
 
  Antes de começar, certifique-se de ter o Node.js e o npm instalados em sua máquina. Se ainda não tiver instalado, você pode baixá-los em nodejs.org.
 
@@ -6,7 +8,12 @@ Criação de um cadastro de clientes que poderá conter muitos contatos associad
 
  npm install
 
+ Preencha corretamente as variáveis de ambiente.
+
  Esses comandos são executados no terminal (linha de comando) e garantirão que todas as bibliotecas necessárias para o seu projeto sejam baixadas e instaladas.
+
+Rodas as migrações
+npm run typeorm:run
 
 Para executar o projeto em um ambiente de desenvolvimento, utilize o seguinte comando:
 npm run dev

@@ -1,5 +1,4 @@
 import { Request, Response, NextFunction } from 'express';
-import jwt from 'jsonwebtoken';
 import AppError from '../error';
 import { verify } from 'jsonwebtoken';
 
@@ -18,7 +17,6 @@ export const validateToken = async (
     }
 
     const token = authorization.split(" ")[1]
-    console.log(token)
     const secretKey = process.env.SECRET_KEY;
 
     if (!secretKey) {
@@ -26,18 +24,17 @@ export const validateToken = async (
     }
 
     verify(token, secretKey, (error, decoded: any) => {
-      console.error('Error verifying token:', error);
+      
       if(error){
         throw new AppError(error.message, 401)
       }
 
       res.locals.foundEntity = {id: decoded.userId, email: decoded.email}
-      console.log(decoded)
     })
     
     return next();
-  } catch (error) {
 
+  } catch (error) {
     return next(error)
   }
 };

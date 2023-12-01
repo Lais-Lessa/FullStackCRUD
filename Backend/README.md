@@ -8,7 +8,13 @@ Projeto: FullStackCRUD
 
  npm install
 
+
+ Preencha corretamente as variáveis de ambiente.
+
  Esses comandos são executados no terminal (linha de comando) e garantirão que todas as bibliotecas necessárias para o seu projeto sejam baixadas e instaladas.
+
+Rodas as migrações
+npm run typeorm:run
 
 Para executar o projeto em um ambiente de desenvolvimento, utilize o seguinte comando:
 npm run dev
