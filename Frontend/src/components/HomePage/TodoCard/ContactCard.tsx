@@ -15,7 +15,7 @@ interface IContactCardProps{
 }
 
 export const ContactCard = ({ contact }: IContactCardProps) => {
-  
+
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedContactId, setSelectedContactId] = useState<string | null>(null);
   const { setGlobalLoading } = useContext(UserContext)
@@ -30,12 +30,15 @@ export const ContactCard = ({ contact }: IContactCardProps) => {
     setIsModalOpen(false);
   };
   
-  const handleDeleteContact = async (contactId: number) => {
+  const handleDeleteContact = async () => {
+
+    setGlobalLoading(false)
     
     const userConfirmed = window.confirm("Você deseja mesmo excluir este contato?") 
+
     if(userConfirmed){
       try {
-        await api.delete(`contact/${contactId}`);
+        await api.delete(`contact/${contact.id}`);
         setGlobalLoading(true)
     }
     catch (error) {
@@ -52,7 +55,7 @@ export const ContactCard = ({ contact }: IContactCardProps) => {
       <p>E-mail: {contact.email}</p>
       <p>Telefone: {contact.phoneNumber}</p>
       <div>
-        <StyledButtonCardRemove onClick={() => handleDeleteContact(Number(contact.id))}>
+        <StyledButtonCardRemove onClick={() => handleDeleteContact()}>
           <FontAwesomeIcon icon={faTrashCan} /> Remover
         </StyledButtonCardRemove>
         <StyledButtonCardEdit onClick={openModal}>

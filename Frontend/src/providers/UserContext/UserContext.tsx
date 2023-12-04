@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useState } from "react";
 import { IUser, IUserContext, IUserContextProvider, IUserRegisterResponse } from "./@types";
 import { useNavigate } from 'react-router-dom'
 import { TRegisterUserSchema } from "../../schemas/registerFormSchema";

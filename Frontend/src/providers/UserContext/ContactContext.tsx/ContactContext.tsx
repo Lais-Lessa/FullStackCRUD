@@ -22,6 +22,7 @@ export const ContactProvider = ({ children }: ITodosProviderProps) => {
                 const newContact = response.data
                 setContactList((contactList) => [...contactList, newContact])   
             } catch (error) {
+              console.log(error)
                 toast.error(
                     'Oops! Algo deu errado ao criar o seu contato, tente novamente mais tarde!',
                     {

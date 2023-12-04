@@ -26,10 +26,7 @@ export const FormRegister = () => {
 })
 
   const submit: SubmitHandler<TRegisterUserSchema> = async (data: TRegisterUserSchema) => {
-
-
     await UserRegister(data)
-    
     }
     
     const isErros = Object.keys(errors).length >= 1

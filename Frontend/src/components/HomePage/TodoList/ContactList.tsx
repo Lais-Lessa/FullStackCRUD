@@ -8,7 +8,6 @@ import { IContact } from "../../../providers/UserContext/ContactContext.tsx/@typ
 export const ContactList = () => {
 
     const { contactList } = useContext(ContactContext);
-    
     return (
       <StyledContactList>
           <>
