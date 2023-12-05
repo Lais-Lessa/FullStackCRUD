@@ -2,7 +2,7 @@ import { Contact } from "../entities/Contact.entity";
 import { User } from "../entities/User.entity";
 import {  contactCreate } from "../interfaces/contact.interfaces";
 import { contactRepo } from "../repositories";
-import { contactCreateSchema } from "../schemas/contact.schema";
+import { contactCreateSchema, contactUpdateSchema } from "../schemas/contact.schema";
 
 
 export const createContact = async (payload: contactCreate, user: User): Promise<any> => {
@@ -64,7 +64,7 @@ export const updateContact = async (
 
   await contactRepo.save(repo);
 
-  return repo;
+  return contactUpdateSchema.parse(repo);
 };
 
 export const contactDestroy = async (contactId: number): Promise<void> => {
