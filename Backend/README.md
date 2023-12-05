@@ -25,7 +25,7 @@ Rotas do Usuário
 
 1. Criação de Usuário
 Descrição: Cria um novo usuário na aplicação.
-Rota: POST /
+Rota: POST /users
 
 {
   "name": "nome_usuario",

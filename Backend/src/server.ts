@@ -4,7 +4,7 @@ import { AppDataSource } from "./data-source";
 AppDataSource.initialize()
   .then((): void => {
     
-const PORT: number = Number(process.env.PORT) || 3003;
+const PORT: number = 3000;
 app.listen(PORT, () => console.log("Server listening on port " + PORT));
     console.log("Aplicação inicializada! Conectada ao banco de dados.");
   })

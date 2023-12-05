@@ -46,7 +46,6 @@ export const EditModal: React.FC<EditModalProps> = ({ isOpen, closeModal, contac
     const fetchData = async () => {
       try {
         if(formattedContactId !== null) {
-
           const response = await api.get(`/contact/${formattedContactId}`);
           const contatoBanco = response.data;
           reset({name: contatoBanco.name, email: contatoBanco.email, phoneNumber: contatoBanco.phoneNumber })

@@ -38,12 +38,17 @@ export const contactServices =  async function contactRead(contactId: number): P
 } 
 
 export const updateContact = async (
-  id: number,
+  contactId: number,
   name?: string,
   email?: string,
   phoneNumber?: string,
 ) => {
-  const repo = await contactRepo.findOne({ where: { id } });
+
+  const repo = await contactRepo.findOne({
+    where: {
+      id: contactId
+    }
+  });
   
   if (!repo) {
     console.log("Contato não encontrado");
@@ -63,7 +68,6 @@ export const updateContact = async (
   }
 
   await contactRepo.save(repo);
-
   return contactUpdateSchema.parse(repo);
 };
 
@@ -80,3 +84,4 @@ export const contactDestroy = async (contactId: number): Promise<void> => {
 
   await contactRepo.remove(contactToRemove);
 };
+
