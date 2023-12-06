@@ -1,6 +1,7 @@
-import { ReactNode } from 'react'
+import { FormEvent, ReactNode } from 'react'
 import { TRegisterUserSchema } from '../../schemas/registerFormSchema'
-
+import { FieldError } from "react-hook-form";
+import { HTMLAttributes } from 'react';
 export interface IUserContextProvider {
   children: ReactNode
 }
@@ -36,3 +37,11 @@ export interface IGetUserResponse {
   name: string
   id: number
 }
+
+export interface IInputProps extends HTMLAttributes<HTMLInputElement>{
+  type: string;
+  label?: string;
+  error?: FieldError;
+  callback?: (e: FormEvent<HTMLInputElement>) => void
+}
+

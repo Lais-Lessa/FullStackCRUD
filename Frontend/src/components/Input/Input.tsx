@@ -1,30 +1,14 @@
-import { ForwardedRef, HTMLAttributes, forwardRef, useState } from "react"
-import { FieldError } from "react-hook-form";
+import { ForwardedRef, forwardRef } from "react"
 import { InputContainerStyled } from "./InputContainerStyled";
-import { formatPhoneNumberInput } from "../../utils/utils";
+import { IInputProps } from "../../providers/UserContext/@types";
 
-interface IInputProps extends HTMLAttributes<HTMLInputElement>{
-    type: string;
-    label?: string;
-    error?: FieldError;
-    isPhoneNumber: boolean;
-}
 
-export const Input = forwardRef(({ label, error, type, isPhoneNumber, ...rest}: IInputProps, ref: ForwardedRef<HTMLInputElement>) => {
-    const [inputValue, setInputValue] = useState('')
-
-    const handleTextChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const value = e.target.value;
-        const formattedValue = isPhoneNumber
-          ? formatPhoneNumberInput(value)
-          : value;
-        setInputValue(formattedValue);
-      };
+export const Input = forwardRef(({ label, error, type, callback, ...rest}: IInputProps, ref: ForwardedRef<HTMLInputElement>) => {
 
     return(
         <InputContainerStyled>
         {label && <label>{label}</label>}
-          <input ref={ref} type={type} {...rest} onChange={handleTextChange} value={inputValue}/>
+          <input ref={ref} type={type} {...rest} onKeyUp={callback} />
         {error && <p>{error.message}</p>}
       </InputContainerStyled>
     );

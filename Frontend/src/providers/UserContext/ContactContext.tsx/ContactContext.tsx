@@ -42,6 +42,7 @@ export const ContactProvider = ({ children }: ITodosProviderProps) => {
                       contactId === contact.id ? { ...contact, ...formData } : contact
                   );
               });
+              
           } else {
               toast.error('Erro ao editar contato', {
                 className: 'toast-error',

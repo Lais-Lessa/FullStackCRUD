@@ -10,29 +10,29 @@ import { StyledEditModal } from './StyledCard/StyledEditModal';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { api } from '../../../services/Api';
 import { toast } from 'react-toastify'
+import { EditModalProps } from '../../../providers/UserContext/ContactContext.tsx/@types';
+import { formatPhoneNumberInput, handleNumber } from '../../../utils/utils';
 
-interface EditModalProps {
-    isOpen: boolean;
-    closeModal: () => void;
-    contactId:number | null;
-}
 
 export const EditModal: React.FC<EditModalProps> = ({ isOpen, closeModal, contactId}) => {
+
   const { editContact, editingContact } = useContext(ContactContext);
-  
+
   if (!isOpen) {
+
     return null; 
   }
 
-  const { register, handleSubmit, reset, formState: { errors } } = useForm<TEditContactFormSchema>({
+  const formattedContactId = typeof contactId === 'string' ? Number(contactId) : contactId;
+
+
+  const { register, handleSubmit, reset, formState: { errors } } = useForm <TEditContactFormSchema> ({
     resolver: zodResolver(editContactFormSchema),
     defaultValues: {
       ...editingContact
     },
   });
-
-  const formattedContactId = typeof contactId === 'string' ? Number(contactId) : contactId;
-
+  
   const submit: SubmitHandler<TEditContactFormSchema> = async (formData: TEditContactFormSchema) => {
     
     if (formattedContactId !== null) {
@@ -42,13 +42,15 @@ export const EditModal: React.FC<EditModalProps> = ({ isOpen, closeModal, contac
   };
   
   useEffect(() => {
-
     const fetchData = async () => {
       try {
         if(formattedContactId !== null) {
           const response = await api.get(`/contact/${formattedContactId}`);
           const contatoBanco = response.data;
-          reset({name: contatoBanco.name, email: contatoBanco.email, phoneNumber: contatoBanco.phoneNumber })
+          const dataFormated = {
+            ...contatoBanco, phoneNumber: formatPhoneNumberInput(contatoBanco.phoneNumber)
+          }
+          reset(dataFormated)
         }
     } catch (error) {
       toast.error('Erro ao buscar dados do contato', {
@@ -56,10 +58,10 @@ export const EditModal: React.FC<EditModalProps> = ({ isOpen, closeModal, contac
       })
     }
   };
-  
     fetchData();
-  
 }, [formattedContactId]);
+
+
 
   return (
     <>
@@ -70,9 +72,9 @@ export const EditModal: React.FC<EditModalProps> = ({ isOpen, closeModal, contac
             <p onClick={closeModal}>X</p>
           </StyledHeaderModal>
           <StyledFormModal>
-            <Input isPhoneNumber={false} type="text" label="Nome Completo:" placeholder="Digite seu nome completo" {...register('name')} error={errors.name} className="custom-input"/>
-            <Input isPhoneNumber={false} type="email" label="E-mail:" placeholder="Digite seu email aqui" {...register('email')} error={errors.email} className="custom-input"/>
-            <Input isPhoneNumber={true} type="text" label="Telefone:" placeholder="Digite seu telefone aqui" {...register('phoneNumber')} error={errors.phoneNumber} className="custom-input"/>
+            <Input type="text" label="Nome Completo:"  {...register('name')} error={errors.name} className="custom-input" />
+            <Input  type="email" label="E-mail:"  {...register('email')} error={errors.email} className="custom-input" />
+            <Input  callback={handleNumber} type="text" label="Telefone:"  {...register('phoneNumber')} error={errors.phoneNumber} className="custom-input" />
             <StyledButtonModal onClick={handleSubmit(submit)}>Editar Contato</StyledButtonModal>
           </StyledFormModal>
         </StyledEditModal>

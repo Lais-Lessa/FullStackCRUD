@@ -13,6 +13,7 @@ import { StyledInnerContainer } from "./StyledRegister/StyledInnerContainer"
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { handleNumber } from "../../utils/utils"
 
 export const FormRegister = () => {
 
@@ -55,19 +56,19 @@ export const FormRegister = () => {
       <ButtonStyled as={Link} to="/login" type="button"> Entrar </ButtonStyled>
       </div>
       
-      <Input isPhoneNumber={false} type="text"
+      <Input type="text"
             placeholder="Nome Completo"
             id="name"
             error={errors.name}
             {...register('name')} />
       
-      <Input isPhoneNumber={false} type="email"
+      <Input type="email"
             placeholder="E-mail"
             id="email"
             error={errors.email}
             {...register('email')} />
 
-      <Input isPhoneNumber={false} type="password"
+      <Input type="password"
             placeholder="Digite aqui sua senha"
             id="password"
             error={errors.password}
@@ -75,14 +76,14 @@ export const FormRegister = () => {
              
 
       <Input
-              isPhoneNumber={false} type="password"
+             type="password"
               placeholder="Confirmar senha"
               id="passwordConfirm"
               error={errors.confirm}
               {...register('confirm')} />
           
 
-      <Input isPhoneNumber={true} type="text"
+      <Input callback={handleNumber} type="text"
             placeholder="Digite seu telefone"
             id="phoneNumber"
             error={errors.phoneNumber}

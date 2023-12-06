@@ -31,3 +31,9 @@ export interface IContactContext {
     setContactList: React.Dispatch<React.SetStateAction<IContact[]>>
     user: IUser | null
 }
+
+export interface EditModalProps {
+    isOpen: boolean;
+    closeModal: () => void;
+    contactId:number | null;
+}

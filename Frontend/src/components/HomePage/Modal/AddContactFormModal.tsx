@@ -8,15 +8,15 @@ import { StyledModalContainer } from './StyledModal/StyledModalContainer';
 import { StyledHeaderModal } from './StyledModal/StyledHeaderModal';
 import { StyledFormModal } from './StyledModal/StyledFormModal';
 import { StyledButtonModal } from '../../Button/StyledButtonModal';
+import { handleNumber } from '../../../utils/utils';
 
-interface EditContactFormProps {
+interface AddContactFormProps {
     isOpen: boolean;
     closeModal: () => void;
 }
 
-export const AddContactFormModal: React.FC<EditContactFormProps> = ({ isOpen, closeModal}) => {
+export const AddContactFormModal: React.FC<AddContactFormProps> = ({ isOpen, closeModal}) => {
 
-  
   const { register, handleSubmit, formState: { errors } } = useForm<TAddNewsFormSchema>({
     resolver: zodResolver(AddContactFormSchema),
   });
@@ -37,9 +37,9 @@ export const AddContactFormModal: React.FC<EditContactFormProps> = ({ isOpen, cl
                 <p onClick={closeModal}>X</p>
                 </StyledHeaderModal>
                 <StyledFormModal>
-                    <Input isPhoneNumber={false} type="text" label="Nome Completo:" placeholder="Digite seu nome completo" {...register('name')} error={errors.name} className="custom-input"/>
-                    <Input isPhoneNumber={false} type="email" label="E-mail:" placeholder="Digite seu email aqui" {...register('email')} error={errors.email} className="custom-input"/>
-                    <Input isPhoneNumber={true} type="text" label="Telefone:" placeholder="Digite seu telefone aqui" {...register('phoneNumber')} error={errors.phoneNumber} className="custom-input"/>
+                    <Input  type="text" label="Nome Completo:" placeholder="Digite seu nome completo" {...register('name')} error={errors.name} className="custom-input" />
+                    <Input  type="email" label="E-mail:" placeholder="Digite seu email aqui" {...register('email')} error={errors.email} className="custom-input" />
+                    <Input type="text" label="Telefone:" placeholder="Digite seu telefone aqui" {...register('phoneNumber')} error={errors.phoneNumber} className="custom-input" callback={handleNumber}/>
                     <StyledButtonModal type="submit" onClick={handleSubmit(submit)}>Cadastrar Contato</StyledButtonModal>
                 </StyledFormModal>
             </StyledModalContainer>

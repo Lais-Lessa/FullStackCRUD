@@ -1,3 +1,5 @@
+import { FormEvent } from "react";
+
 export const formatPhoneNumberInput = (value: string) => {
     const numericValue = value.replace(/\D/g, "");
   
@@ -20,3 +22,8 @@ export const formatPhoneNumberInput = (value: string) => {
     return formattedValue;
   };
   
+export const handleNumber = (e: FormEvent<HTMLInputElement>) => {
+  let value = e.currentTarget.value
+  value = formatPhoneNumberInput(value)
+  e.currentTarget.value = value
+}

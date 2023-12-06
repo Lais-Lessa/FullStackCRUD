@@ -15,6 +15,6 @@ contactRouter.post(
 )
 
 contactRouter.get("", contactControllers.read)
-contactRouter.get("/:id", contactControllers.read)
+contactRouter.get("/:id", contactControllers.readContact)
 contactRouter.patch("/:id", validateBody(contactUpdateSchema), contactControllers.update)
 contactRouter.delete("/:id", contactControllers.destroy)
