@@ -17,7 +17,9 @@ interface IContactCardProps{
 export const ContactCard = ({ contact }: IContactCardProps) => {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
+
   const [selectedContactId, setSelectedContactId] = useState<string | null>(null);
+
   const { setGlobalLoading } = useContext(UserContext)
 
   const openModal = () => {
@@ -66,7 +68,7 @@ export const ContactCard = ({ contact }: IContactCardProps) => {
         <EditModal
           isOpen={isModalOpen}
           closeModal={closeModal}
-          contactId={selectedContactId !== null ? parseInt(selectedContactId, 10) : null}
+          contactId={contact.id !== null ? contact.id : null}
         />
       )}
     </StyledListCard>

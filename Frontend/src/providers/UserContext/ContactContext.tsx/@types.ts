@@ -35,5 +35,5 @@ export interface IContactContext {
 export interface EditModalProps {
     isOpen: boolean;
     closeModal: () => void;
-    contactId:number | null;
+    contactId: number | null;
 }

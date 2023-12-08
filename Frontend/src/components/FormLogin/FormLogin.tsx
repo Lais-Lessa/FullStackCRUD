@@ -58,14 +58,14 @@ export const FormLogin = () => {
 
             <h1>Login</h1>
 
-            <Input isPhoneNumber={false} type="email"
+            <Input  type="email"
                           placeholder="E-mail"
                           id="email"
                           error={errors.email}
                           {...register('email')} />
                   
 
-            <Input isPhoneNumber={false} type="password"
+            <Input  type="password"
                           placeholder="Senha"
                           id="password"
                           error={errors.password}

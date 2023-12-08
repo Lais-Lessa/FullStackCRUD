@@ -31,7 +31,7 @@ export const UserContextProvider = ({ children }: IUserContextProvider) => {
             })
             navigate('/login')
         } catch (error) {
-            toast.error('Ops! Algo deu errado',{
+            toast.error('Ops! Algo deu errado.',{
                 autoClose: 600,
                 className: 'toast-error',
             })

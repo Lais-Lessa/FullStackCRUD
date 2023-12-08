@@ -15,7 +15,6 @@ import { formatPhoneNumberInput, handleNumber } from '../../../utils/utils';
 
 
 export const EditModal: React.FC<EditModalProps> = ({ isOpen, closeModal, contactId}) => {
-
   const { editContact, editingContact } = useContext(ContactContext);
 
   if (!isOpen) {
