@@ -30,6 +30,8 @@ export interface IContactContext {
     setIsOpenModal: React.Dispatch<React.SetStateAction<boolean>>
     setContactList: React.Dispatch<React.SetStateAction<IContact[]>>
     user: IUser | null
+    fetchContacts: () => Promise<void>
+   
 }
 
 export interface EditModalProps {

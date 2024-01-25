@@ -14,13 +14,14 @@ export const ContactProvider = ({ children }: ITodosProviderProps) => {
     const [isOpenModal, setIsOpenModal] = useState(false);
     const [ editingContact, setEditingContact] = useState<IContact | null>(null);
     const { user } = useUserContext()
+    const  token  = localStorage.getItem("@TOKEN")
     
     const addContact = async (formData: IAddContactFormData) => {
 
             try {
-                const response = await api.post(`contact/`, formData);
-                const newContact = response.data
-                setContactList((contactList) => [...contactList, newContact])   
+                await api.post(`contact/`, formData);
+                await fetchContacts()
+
             } catch (error) {
               console.log(error)
                 toast.error(
@@ -33,6 +34,7 @@ export const ContactProvider = ({ children }: ITodosProviderProps) => {
     };
 
     const editContact = async (formData: TEditContactFormSchema, contactId: number) => {
+      
       try {
           const response = await api.patch(`contact/${contactId}`, formData);
   
@@ -54,7 +56,26 @@ export const ContactProvider = ({ children }: ITodosProviderProps) => {
         })
       }
   };
+
+  const fetchContacts = async () => {
+
+    try {
+
+        const { data } = await api.get('/contact', {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        });
+        setContactList(data); 
     
+    } catch (error) {
+      toast.error('Oops! Algo deu errado ao carregar o seu contato, tente novamente mais tarde');
+    } finally {
+    }
+  };
+
+
+
     return (
         <ContactContext.Provider
           value={{
@@ -67,9 +88,11 @@ export const ContactProvider = ({ children }: ITodosProviderProps) => {
             setIsOpenModal,
             setContactList,
             user,
+            fetchContacts
           }}
         >
           {children}
         </ContactContext.Provider>
       );
 }
+

@@ -9,6 +9,7 @@ import { EditModal } from "./EditModal"
 import { api } from "../../../services/Api"
 import { UserContext } from "../../../providers/UserContext/UserContext"
 import { toast } from 'react-toastify'
+import { ContactContext } from "../../../providers/UserContext/ContactContext.tsx/ContactContext"
 
 interface IContactCardProps{
   contact: IContact 
@@ -19,8 +20,10 @@ export const ContactCard = ({ contact }: IContactCardProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const [selectedContactId, setSelectedContactId] = useState<string | null>(null);
-
+  console.log(selectedContactId)
   const { setGlobalLoading } = useContext(UserContext)
+  
+  const { fetchContacts } = useContext(ContactContext)
 
   const openModal = () => {
       setSelectedContactId(String(contact.id))
@@ -41,6 +44,7 @@ export const ContactCard = ({ contact }: IContactCardProps) => {
     if(userConfirmed){
       try {
         await api.delete(`contact/${contact.id}`);
+        fetchContacts()
         setGlobalLoading(true)
     }
     catch (error) {

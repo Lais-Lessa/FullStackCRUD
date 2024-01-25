@@ -22,7 +22,7 @@ export const FormRegister = () => {
   const navigate = useNavigate();
 
 
-  const { register, handleSubmit, reset, formState: { errors }, } = useForm<TRegisterUserSchema>({
+  const { register, handleSubmit, formState: { errors }, } = useForm<TRegisterUserSchema>({
     resolver:zodResolver(RegisterSchema),
 })
 

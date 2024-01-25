@@ -15,15 +15,12 @@ import { formatPhoneNumberInput, handleNumber } from '../../../utils/utils';
 
 
 export const EditModal: React.FC<EditModalProps> = ({ isOpen, closeModal, contactId}) => {
+  
   const { editContact, editingContact } = useContext(ContactContext);
 
   if (!isOpen) {
-
     return null; 
   }
-
-  const formattedContactId = typeof contactId === 'string' ? Number(contactId) : contactId;
-
 
   const { register, handleSubmit, reset, formState: { errors } } = useForm <TEditContactFormSchema> ({
     resolver: zodResolver(editContactFormSchema),
@@ -31,6 +28,8 @@ export const EditModal: React.FC<EditModalProps> = ({ isOpen, closeModal, contac
       ...editingContact
     },
   });
+  
+  const formattedContactId = typeof contactId === 'string' ? Number(contactId) : contactId;
   
   const submit: SubmitHandler<TEditContactFormSchema> = async (formData: TEditContactFormSchema) => {
     
